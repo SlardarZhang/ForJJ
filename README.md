@@ -87,7 +87,9 @@ FROM `numbers`
 
 ## 2. DENSE_RANK vs RANK
 DENSE_RANK: 在当前分区中的排名，排名无断档
+
 RANK: 在当前分区中的排名，有断档。
+
 所谓断档即出现并列的排名的情况，是否会出现某个排名缺失，比如1中提出的表格，执行下面的SQL语句
 ```SQL
 SELECT
@@ -118,6 +120,10 @@ FROM `numbers`
 返回该排名所位于的百分比，公式为：(rank - 1) / (rows - 1)，数据可参考1.中提到的PERCENT_RANK()
 
 ## 4. FIRST_VALUE vs LAST_VALUE
+FIRST_VALUE 获取当前窗口的第一行的值
+
+LAST_VALUE 获取当前窗口的最后一行的值
+
 表名: number_list
 
 | index |
@@ -260,9 +266,13 @@ FROM `number_list2`
 
 ## 5. LAG vs LEAD
 ``LAG``为返回当前行的前一行的值，``LEAD``为返回当前行的后一行的值。
+
 ``LAG``与``LEAD``可以有3个入参。
+
 第一个参数为列名。
+
 第二个参数为可选参数，既第N行，若想返回当前行前的两行则可写为``LAG(`column`, 2)``和``LEAD(`column`, 2)``，该参数可以为0，0表示当前行，但是不能是负数。
+
 第三个参数为可选参数，当结果为空时候的默认值。
 
 建表SQL:
